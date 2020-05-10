@@ -10,50 +10,70 @@ public class Memory {
     private List<ThreeAddressCode> codeBlock;
     private int lastTempIndex;
     private int lastDataAddress;
-    private final static int stratTempMemoryAddress = 500;
-    private final static int stratDataMemoryAddress = 200;
+    private final static int startTempMemoryAddress = 500;
+    private final static int startDataMemoryAddress = 200;
     private final static int dataSize = 4;
     private final static int tempSize = 4;
 
     public Memory() {
         codeBlock = new ArrayList<>();
-        lastTempIndex = Memory.stratTempMemoryAddress;
-        lastDataAddress = Memory.stratDataMemoryAddress;
+        lastTempIndex = Memory.startTempMemoryAddress;
+        lastDataAddress = Memory.startDataMemoryAddress;
+    }
+
+    public List<ThreeAddressCode> getCodeBlock() {
+        return this.codeBlock;
+    }
+
+    public int getLastTempIndex() {
+        return this.lastTempIndex;
+    }
+
+    public void setLastTempIndex(int lastTempIndex) {
+        this.lastTempIndex = lastTempIndex;
+    }
+
+    public int getLastDataAddress() {
+        return this.lastDataAddress;
+    }
+
+    public void setLastDataAddress(int lastDataAddress) {
+        this.lastDataAddress = lastDataAddress;
     }
 
     public int getTemp() {
-        lastTempIndex += Memory.tempSize;
-        return lastTempIndex - Memory.tempSize;
+        setLastTempIndex(getLastDataAddress() + Memory.tempSize);
+        return getLastTempIndex() - Memory.tempSize;
     }
 
     public int getDateAddress() {
-        lastDataAddress += Memory.dataSize;
-        return lastDataAddress - Memory.dataSize;
+        setLastDataAddress(getLastDataAddress() + Memory.dataSize);
+        return getLastDataAddress() - Memory.dataSize;
     }
 
     public int saveMemory() {
-        codeBlock.add(new ThreeAddressCode());
-        return codeBlock.size() - 1;
+        getCodeBlock().add(new ThreeAddressCode());
+        return getCodeBlock().size() - 1;
     }
 
     public void add3AddressCode(Operation op, Address opr1, Address opr2, Address opr3) {
-        codeBlock.add(new ThreeAddressCode(op, opr1, opr2, opr3));
+        getCodeBlock().add(new ThreeAddressCode(op, opr1, opr2, opr3));
     }
 
     public void add3AddressCode(int i, Operation op, Address opr1, Address opr2, Address opr3) {
-        codeBlock.remove(i);
-        codeBlock.add(i, new ThreeAddressCode(op, opr1, opr2, opr3));
+        getCodeBlock().remove(i);
+        getCodeBlock().add(i, new ThreeAddressCode(op, opr1, opr2, opr3));
     }
 
 
     public int getCurrentCodeBlockAddress() {
-        return codeBlock.size();
+        return getCodeBlock().size();
     }
 
     public void pintCodeBlock() {
         System.out.println("Code Block");
-        for (int i = 0; i < codeBlock.size(); i++) {
-            System.out.println(i + " : " + codeBlock.get(i).toString());
+        for (int i = 0; i < getCodeBlock().size(); i++) {
+            System.out.println(i + " : " + getCodeBlock().get(i).toString());
         }
     }
 }
@@ -75,25 +95,41 @@ class ThreeAddressCode {
         Operand3 = opr3;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Address getOperand1() {
+        return Operand1;
+    }
+
+    public Address getOperand2() {
+        return Operand2;
+    }
+
+    public Address getOperand3() {
+        return Operand3;
+    }
+
     public String toString() {
-        if (operation == null) {
+        if (getOperation() == null) {
             return "";
         }
-        StringBuffer res = new StringBuffer("(");
-        res.append(operation.toString()).append(",");
+        StringBuilder res = new StringBuilder("(");
+        res.append(getOperation().toString()).append(",");
 
-        if (Operand1 != null) {
-            res.append(Operand1.toString());
+        if (getOperand1() != null) {
+            res.append(getOperand1().toString());
         }
         res.append(",");
 
-        if (Operand2 != null) {
-            res.append(Operand2.toString());
+        if (getOperand2() != null) {
+            res.append(getOperand2().toString());
         }
         res.append(",");
 
-        if (Operand3 != null) {
-            res.append(Operand3.toString());
+        if (getOperand3() != null) {
+            res.append(getOperand3().toString());
         }
         res.append(")");
 
