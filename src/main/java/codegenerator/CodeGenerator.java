@@ -91,7 +91,7 @@ public class CodeGenerator {
                 equal();
                 break;
             case 20:
-                less_than();
+                lessThan();
                 break;
             case 21:
                 and();
@@ -279,65 +279,28 @@ public class CodeGenerator {
         memory.add3AddressCode(Operation.ASSIGN, s1, s2, null);
     }
 
-    public void add() {
+    public void doOperation(Operation operation, String operationString) {
         Address temp = new Address(memory.getTemp(), VarType.Int);
         Address s2 = ss.pop();
         Address s1 = ss.pop();
 
         if (s1.varType != VarType.Int || s2.varType != VarType.Int) {
-            ErrorHandler.printError("In add two operands must be integer");
+            ErrorHandler.printError(String.format("In %s two operands must be integer", operationString));
         }
-        memory.add3AddressCode(Operation.ADD, s1, s2, temp);
+        memory.add3AddressCode(operation, s1, s2, temp);
         ss.push(temp);
+    }
+
+    public void add() {
+        doOperation(Operation.ADD, "add");
     }
 
     public void sub() {
-        Address temp = new Address(memory.getTemp(), VarType.Int);
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (s1.varType != VarType.Int || s2.varType != VarType.Int) {
-            ErrorHandler.printError("In sub two operands must be integer");
-        }
-        memory.add3AddressCode(Operation.SUB, s1, s2, temp);
-        ss.push(temp);
+        doOperation(Operation.SUB, "sub");
     }
 
     public void mult() {
-        Address temp = new Address(memory.getTemp(), VarType.Int);
-        Address s2 = ss.pop();
-        Address s1 = ss.pop();
-        if (s1.varType != VarType.Int || s2.varType != VarType.Int) {
-            ErrorHandler.printError("In mult two operands must be integer");
-        }
-        memory.add3AddressCode(Operation.MULT, s1, s2, temp);
-        ss.push(temp);
-    }
-
-    public void label() {
-        ss.push(new Address(memory.getCurrentCodeBlockAddress(), VarType.Address));
-    }
-
-    public void save() {
-        ss.push(new Address(memory.saveMemory(), VarType.Address));
-    }
-
-    public void _while() {
-        memory.add3AddressCode(ss.pop().num, Operation.JPF, ss.pop(), new Address(memory.getCurrentCodeBlockAddress() + 1, VarType.Address), null);
-        memory.add3AddressCode(Operation.JP, ss.pop(), null, null);
-    }
-
-    public void jpf_save() {
-        Address save = new Address(memory.saveMemory(), VarType.Address);
-        memory.add3AddressCode(ss.pop().num, Operation.JPF, ss.pop(), new Address(memory.getCurrentCodeBlockAddress(), VarType.Address), null);
-        ss.push(save);
-    }
-
-    public void jpHere() {
-        memory.add3AddressCode(ss.pop().num, Operation.JP, new Address(memory.getCurrentCodeBlockAddress(), VarType.Address), null, null);
-    }
-
-    public void print() {
-        memory.add3AddressCode(Operation.PRINT, ss.pop(), null, null);
+        doOperation(Operation.MULT, "mult");
     }
 
     public void equal() {
@@ -351,7 +314,7 @@ public class CodeGenerator {
         ss.push(temp);
     }
 
-    public void less_than() {
+    public void lessThan() {
         Address temp = new Address(memory.getTemp(), VarType.Bool);
         Address s2 = ss.pop();
         Address s1 = ss.pop();
@@ -384,6 +347,33 @@ public class CodeGenerator {
         memory.add3AddressCode(Operation.NOT, s1, s2, temp);
         ss.push(temp);
 
+    }
+
+    public void label() {
+        ss.push(new Address(memory.getCurrentCodeBlockAddress(), VarType.Address));
+    }
+
+    public void save() {
+        ss.push(new Address(memory.saveMemory(), VarType.Address));
+    }
+
+    public void _while() {
+        memory.add3AddressCode(ss.pop().num, Operation.JPF, ss.pop(), new Address(memory.getCurrentCodeBlockAddress() + 1, VarType.Address), null);
+        memory.add3AddressCode(Operation.JP, ss.pop(), null, null);
+    }
+
+    public void jpf_save() {
+        Address save = new Address(memory.saveMemory(), VarType.Address);
+        memory.add3AddressCode(ss.pop().num, Operation.JPF, ss.pop(), new Address(memory.getCurrentCodeBlockAddress(), VarType.Address), null);
+        ss.push(save);
+    }
+
+    public void jpHere() {
+        memory.add3AddressCode(ss.pop().num, Operation.JP, new Address(memory.getCurrentCodeBlockAddress(), VarType.Address), null, null);
+    }
+
+    public void print() {
+        memory.add3AddressCode(Operation.PRINT, ss.pop(), null, null);
     }
 
     public void defClass() {
