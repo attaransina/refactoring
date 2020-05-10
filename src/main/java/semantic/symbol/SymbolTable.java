@@ -53,14 +53,10 @@ public class SymbolTable {
     }
 
     public void addMethodLocalVariable(String className, String methodName, String localVariableName) {
-//        try {
             if (klasses.get(className).Methodes.get(methodName).localVariable.containsKey(localVariableName)) {
                 ErrorHandler.printError("This variable already defined");
             }
             klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, mem.getDateAddress()));
-//        }catch (NullPointerException e){
-//            e.printStackTrace();
-//        }
     }
 
     public void setSuperClass(String superClass, String className) {
@@ -72,13 +68,7 @@ public class SymbolTable {
     }
 
     public Symbol get(String fieldName,String className) {
-//        try {
             return klasses.get(className).getField(fieldName);
-//        }catch (NullPointerException n)
-//        {
-//            n.printStackTrace();
-//            return null;
-//        }
     }
 
     public Symbol get(String className, String methodName, String variable) {
@@ -94,12 +84,7 @@ public class SymbolTable {
     }
 
     public void startCall(String className,String methodName) {
-//        try {
             klasses.get(className).Methodes.get(methodName).reset();
-//        }catch (NullPointerException n)
-//        {
-//            n.printStackTrace();
-//        }
     }
 
     public int getMethodCallerAddress(String className, String methodName) {
@@ -111,13 +96,7 @@ public class SymbolTable {
     }
 
     public SymbolType getMethodReturnType(String className, String methodName) {
-//        try {
-            return klasses.get(className).Methodes.get(methodName).returnType;
-//        }catch (NullPointerException ed){
-//            ed.printStackTrace();
-//            return null;
-//        }
-
+        return klasses.get(className).Methodes.get(methodName).returnType;
     }
 
     public int getMethodAddress(String className, String methodName) {
@@ -190,17 +169,3 @@ public class SymbolTable {
     }
 
 }
-
-//class Symbol{
-//    public SymbolType type;
-//    public int address;
-//    public Symbol(SymbolType type , int address)
-//    {
-//        this.type = type;
-//        this.address = address;
-//    }
-//}
-//enum SymbolType{
-//    Int,
-//    Bool
-//}
