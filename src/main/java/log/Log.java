@@ -5,7 +5,8 @@ package log;
  */
 public final class Log {
 
-    private Log() {}
+    private Log() {
+    }
 
     public static void print(String s) {
         // TODO

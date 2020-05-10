@@ -53,10 +53,10 @@ public class SymbolTable {
     }
 
     public void addMethodLocalVariable(String className, String methodName, String localVariableName) {
-            if (klasses.get(className).Methodes.get(methodName).localVariable.containsKey(localVariableName)) {
-                ErrorHandler.printError("This variable already defined");
-            }
-            klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, mem.getDateAddress()));
+        if (klasses.get(className).Methodes.get(methodName).localVariable.containsKey(localVariableName)) {
+            ErrorHandler.printError("This variable already defined");
+        }
+        klasses.get(className).Methodes.get(methodName).localVariable.put(localVariableName, new Symbol(lastType, mem.getDateAddress()));
     }
 
     public void setSuperClass(String superClass, String className) {
@@ -67,8 +67,8 @@ public class SymbolTable {
         return keyWords.get(keywordName);
     }
 
-    public Symbol get(String fieldName,String className) {
-            return klasses.get(className).getField(fieldName);
+    public Symbol get(String fieldName, String className) {
+        return klasses.get(className).getField(fieldName);
     }
 
     public Symbol get(String className, String methodName, String variable) {
@@ -83,8 +83,8 @@ public class SymbolTable {
         return klasses.get(className).Methodes.get(methodName).getNextParameter();
     }
 
-    public void startCall(String className,String methodName) {
-            klasses.get(className).Methodes.get(methodName).reset();
+    public void startCall(String className, String methodName) {
+        klasses.get(className).Methodes.get(methodName).reset();
     }
 
     public int getMethodCallerAddress(String className, String methodName) {

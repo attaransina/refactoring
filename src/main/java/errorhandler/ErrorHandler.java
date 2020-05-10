@@ -6,7 +6,8 @@ package errorhandler;
 public final class ErrorHandler {
     public static boolean hasError = false;
 
-    private ErrorHandler() {}
+    private ErrorHandler() {
+    }
 
     public static void printError(String msg) {
         hasError = true;

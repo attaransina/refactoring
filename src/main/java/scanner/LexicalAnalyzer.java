@@ -35,7 +35,7 @@ public class LexicalAnalyzer {
                         break;
 
                     }
-                    if(matcher.group(Type.ErrorID.name())!=null){
+                    if (matcher.group(Type.ErrorID.name()) != null) {
                         ErrorHandler.printError("The id must start with character");
                         break;
                     }
@@ -44,6 +44,6 @@ public class LexicalAnalyzer {
                 }
             }
         }
-        return new Token(Type.EOF,"$");
+        return new Token(Type.EOF, "$");
     }
 }
