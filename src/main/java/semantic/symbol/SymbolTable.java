@@ -2,6 +2,8 @@ package semantic.symbol;
 
 
 import codegenerator.*;
+import codegenerator.address.Address;
+import codegenerator.address.ImidiateAddress;
 import errorhandler.ErrorHandler;
 
 import java.util.ArrayList;

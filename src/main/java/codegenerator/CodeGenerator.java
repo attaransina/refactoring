@@ -1,5 +1,9 @@
 package codegenerator;
 
+import codegenerator.address.Address;
+import codegenerator.address.DirectAddress;
+import codegenerator.address.ImidiateAddress;
+import codegenerator.address.IndirectAddress;
 import log.Log;
 import errorhandler.ErrorHandler;
 import scanner.token.Token;

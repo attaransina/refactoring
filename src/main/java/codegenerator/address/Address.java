@@ -1,4 +1,6 @@
-package codegenerator;
+package codegenerator.address;
+
+import codegenerator.VarType;
 
 /**
  * Created by mohammad hosein on 6/28/2015.

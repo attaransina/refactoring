@@ -1,4 +1,7 @@
-package codegenerator;
+package codegenerator.address;
+
+import codegenerator.VarType;
+import codegenerator.address.Address;
 
 public class DirectAddress extends Address {
     public DirectAddress(int num, VarType varType) {
