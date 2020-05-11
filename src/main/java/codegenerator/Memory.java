@@ -86,9 +86,7 @@ class ThreeAddressCode {
     public Address Operand2;
     public Address Operand3;
 
-    public ThreeAddressCode() {
-
-    }
+    public ThreeAddressCode() {}
 
     public ThreeAddressCode(Operation op, Address opr1, Address opr2, Address opr3) {
         operation = op;

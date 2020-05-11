@@ -13,9 +13,9 @@ public class ParseTable {
 
     public ParseTable(String jsonTable) throws Exception {
         jsonTable = jsonTable.substring(2, jsonTable.length() - 2);
-        String[] rows = jsonTable.split("\\],\\[");
-        Map<Integer, Token> terminals = new HashMap<Integer, Token>();
-        Map<Integer, NonTerminal> nonTerminals = new HashMap<Integer, NonTerminal>();
+        String[] rows = jsonTable.split("],\\[");
+        Map<Integer, Token> terminals = new HashMap<>();
+        Map<Integer, NonTerminal> nonTerminals = new HashMap<>();
         rows[0] = rows[0].substring(1, rows[0].length() - 1);
         String[] cols = rows[0].split("\",\"");
         for (int i = 1; i < cols.length; i++) {
@@ -24,22 +24,18 @@ public class ParseTable {
                 try {
                     nonTerminals.put(i, NonTerminal.valueOf(temp));
                 } catch (Exception e) {
-                    temp = temp;
+                    e.printStackTrace();
                 }
             } else {
                 terminals.put(i, new Token(Token.getTyepFormString(cols[i]), cols[i]));
             }
         }
-        actionTable = new ArrayList<Map<Token, Action>>();
-        gotoTable = new ArrayList<Map<NonTerminal, Integer>>();
+        actionTable = new ArrayList<>();
+        gotoTable = new ArrayList<>();
         for (int i = 1; i < rows.length; i++) {
-            if (i == 100) {
-                int a = 1;
-                a++;
-            }
             rows[i] = rows[i].substring(1, rows[i].length() - 1);
             cols = rows[i].split("\",\"");
-            actionTable.add(new HashMap<Token, Action>());
+            actionTable.add(new HashMap<>());
             gotoTable.add(new HashMap<>());
             for (int j = 1; j < cols.length; j++) {
                 if (!cols[j].equals("")) {
