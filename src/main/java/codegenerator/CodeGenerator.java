@@ -464,9 +464,4 @@ public class CodeGenerator {
     public void lastTypeInt() {
         symbolTable.setLastType(SymbolType.Int);
     }
-
-    public void main() {
-
-    }
-
 }
