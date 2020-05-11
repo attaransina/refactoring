@@ -11,6 +11,7 @@ import java.util.Stack;
 import log.Log;
 import codegenerator.CodeGenerator;
 import errorhandler.ErrorHandler;
+import parser.action.Action;
 import scanner.LexicalAnalyzer;
 import scanner.token.Token;
 
@@ -51,13 +52,13 @@ public class Parser {
                 currentAction = parseTable.getActionTable(parsStack.peek(), lookAhead);
                 Log.print(currentAction.toString());
 
-                switch (currentAction.action) {
-                    case shift:
+                switch (currentAction.getActionType()) {
+                    case "shift":
                         parsStack.push(currentAction.number);
                         lookAhead = lexicalAnalyzer.getNextToken();
 
                         break;
-                    case reduce:
+                    case "reduce":
                         Rule rule = rules.get(currentAction.number);
                         for (int i = 0; i < rule.RHS.size(); i++) {
                             parsStack.pop();
@@ -72,14 +73,13 @@ public class Parser {
                             Log.print("Code Genetator Error");
                         }
                         break;
-                    case accept:
+                    case "accept":
                         finish = true;
                         break;
                 }
                 Log.print("");
 
             } catch (Exception ignored) {
-
                 ignored.printStackTrace();
             }
 

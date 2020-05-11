@@ -195,7 +195,6 @@ public class CodeGenerator {
                 t = VarType.Bool;
                 break;
             case Int:
-                t = VarType.Int;
                 break;
         }
         ss.push(new DirectAddress(s.address, t));
