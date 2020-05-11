@@ -423,6 +423,7 @@ public class CodeGenerator {
                 break;
             case Bool:
                 temp = VarType.Bool;
+                break;
         }
         if (s.varType != temp) {
             ErrorHandler.printError("The type of method and return address was not match");

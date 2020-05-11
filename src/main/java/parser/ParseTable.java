@@ -42,24 +42,28 @@ public class ParseTable {
             actionTable.add(new HashMap<>());
             gotoTable.add(new HashMap<>());
             for (int j = 1; j < cols.length; j++) {
-                if (!cols[j].equals("")) {
-                    if (cols[j].equals("acc")) {
-                        actionTable.get(actionTable.size() - 1).put(terminals.get(j), new AcceptAction(0));
-                    } else if (terminals.containsKey(j)) {
-                        Token t = terminals.get(j);
-                        Action a;
-                        if (cols[j].charAt(0) == 'r') {
-                            a = new ReduceAction(Integer.parseInt(cols[j].substring(1)));
-                        } else {
-                            a = new ShiftAction(Integer.parseInt(cols[j].substring(1)));
-                        }
-                        actionTable.get(actionTable.size() - 1).put(t, a);
-                    } else if (nonTerminals.containsKey(j)) {
-                        gotoTable.get(gotoTable.size() - 1).put(nonTerminals.get(j), Integer.parseInt(cols[j]));
-                    } else {
-                        throw new Exception();
-                    }
+                doAction(cols, j, terminals, nonTerminals);
+            }
+        }
+    }
+
+    private void doAction(String[] cols, int j, Map<Integer, Token> terminals, Map<Integer, NonTerminal> nonTerminals) throws Exception {
+        if (!cols[j].equals("")) {
+            if (cols[j].equals("acc")) {
+                actionTable.get(actionTable.size() - 1).put(terminals.get(j), new AcceptAction(0));
+            } else if (terminals.containsKey(j)) {
+                Token t = terminals.get(j);
+                Action a;
+                if (cols[j].charAt(0) == 'r') {
+                    a = new ReduceAction(Integer.parseInt(cols[j].substring(1)));
+                } else {
+                    a = new ShiftAction(Integer.parseInt(cols[j].substring(1)));
                 }
+                actionTable.get(actionTable.size() - 1).put(t, a);
+            } else if (nonTerminals.containsKey(j)) {
+                gotoTable.get(gotoTable.size() - 1).put(nonTerminals.get(j), Integer.parseInt(cols[j]));
+            } else {
+                throw new Exception();
             }
         }
     }
