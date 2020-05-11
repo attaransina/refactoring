@@ -25,7 +25,6 @@ public class CodeGenerator {
 
     public CodeGenerator() {
         symbolTable = new SymbolTable(memory);
-        //TODO
     }
 
     public void printMemory() {
