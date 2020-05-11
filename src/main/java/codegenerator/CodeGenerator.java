@@ -229,11 +229,11 @@ public class CodeGenerator {
             symbolTable.getNextParam(className, methodName);
             ErrorHandler.printError("The few argument pass for method");
         } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
         VarType t = VarType.Int;
         switch (symbolTable.getMethodReturnType(className, methodName)) {
             case Int:
-                t = VarType.Int;
                 break;
             case Bool:
                 t = VarType.Bool;

@@ -1,7 +1,8 @@
 package semantic.symbol;
 
 
-import codegenerator.*;
+import codegenerator.Memory;
+import codegenerator.VarType;
 import codegenerator.address.Address;
 import codegenerator.address.ImidiateAddress;
 import errorhandler.ErrorHandler;
