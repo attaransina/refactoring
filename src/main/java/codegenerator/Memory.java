@@ -44,7 +44,7 @@ public class Memory {
     }
 
     public int getTemp() {
-        setLastTempIndex(getLastDataAddress() + Memory.tempSize);
+        setLastTempIndex(getLastTempIndex() + Memory.tempSize);
         return getLastTempIndex() - Memory.tempSize;
     }
 

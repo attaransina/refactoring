@@ -1,7 +1,6 @@
 package codegenerator.address;
 
 import codegenerator.VarType;
-import codegenerator.address.Address;
 
 public class ImidiateAddress extends Address {
     public ImidiateAddress(int num, VarType varType) {
